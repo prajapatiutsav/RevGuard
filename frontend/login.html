@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>RevGuard AI - Login</title>
+
+    <style>
+
+        /* =========================================================
+   REVGUARD — PREMIUM AUTHENTICATION UI
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --navy: #0b1220;
+    --navy-soft: #111b2e;
+    --blue: #2563eb;
+    --blue-light: #3b82f6;
+    --text: #172033;
+    --muted: #64748b;
+    --border: #dbe3ef;
+    --surface: #ffffff;
+    --background: #f4f7fb;
+    --danger-bg: #fff1f2;
+    --danger: #be123c;
+    --success-bg: #ecfdf5;
+    --success: #047857;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 20px;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59, 130, 246, 0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fafc 0%,
+            #eef3f9 100%
+        );
+
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATION
+   ========================================================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    pointer-events: none;
+
+    opacity: 0.35;
+
+    z-index: -1;
+}
+
+body::before {
+    top: -100px;
+    left: -100px;
+
+    background: rgba(37, 99, 235, 0.18);
+}
+
+body::after {
+    right: -100px;
+    bottom: -100px;
+
+    background: rgba(14, 165, 233, 0.15);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.auth-container {
+    width: 100%;
+    max-width: 440px;
+
+    padding: 10px;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+    text-align: center;
+
+    margin-bottom: 26px;
+
+    animation:
+        fadeDown 0.55s ease both;
+}
+
+.brand h1 {
+    display: inline-block;
+
+    font-size: 42px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.8px;
+
+    color: var(--navy);
+
+    margin-bottom: 10px;
+
+    position: relative;
+}
+
+.brand h1::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--blue);
+
+    right: -12px;
+    bottom: 5px;
+
+    box-shadow:
+        0 0 12px
+        rgba(37, 99, 235, 0.55);
+}
+
+.brand p {
+    color: var(--muted);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    letter-spacing: 0.1px;
+}
+
+
+/* =========================================================
+   AUTH CARD
+   ========================================================= */
+
+.auth-card {
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border: 1px solid
+        rgba(219, 227, 239, 0.9);
+
+    border-radius: 22px;
+
+    padding: 38px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(15, 23, 42, 0.10),
+        0 4px 12px
+        rgba(15, 23, 42, 0.04);
+
+    backdrop-filter: blur(14px);
+
+    animation:
+        fadeUp 0.6s ease both;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 30px 70px
+        rgba(15, 23, 42, 0.12),
+        0 6px 16px
+        rgba(15, 23, 42, 0.05);
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.auth-card h2 {
+    font-size: 27px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+    letter-spacing: -0.6px;
+
+    color: var(--navy);
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    margin-bottom: 27px;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.message {
+    display: none;
+
+    padding: 12px 14px;
+
+    border-radius: 11px;
+
+    margin-bottom: 18px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    border: 1px solid transparent;
+
+    animation:
+        messageIn 0.25s ease both;
+}
+
+.message.error {
+    display: block;
+
+    background: var(--danger-bg);
+
+    color: var(--danger);
+
+    border-color: #fecdd3;
+}
+
+.message.success {
+    display: block;
+
+    background: var(--success-bg);
+
+    color: var(--success);
+
+    border-color: #a7f3d0;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #334155;
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+
+    background: #fbfdff;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #a0aec0;
+}
+
+.form-group input:hover {
+    background: #ffffff;
+
+    border-color: #cbd5e1;
+}
+
+.form-group input:focus {
+    background: #ffffff;
+
+    border-color: var(--blue);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   PASSWORD
+   ========================================================= */
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 72px;
+}
+
+.show-password {
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 5px 7px;
+
+    border-radius: 6px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.show-password:hover {
+    background: #eef2f7;
+
+    color: var(--navy);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.primary-button {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1e293b
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.1px;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+
+    box-shadow:
+        0 7px 18px
+        rgba(15, 23, 42, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 24px
+        rgba(15, 23, 42, 0.22);
+
+    background:
+        linear-gradient(
+            135deg,
+            #172033,
+            #253451
+        );
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+.primary-button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin: 24px 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #dbe3ef,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   GOOGLE BUTTON
+   ========================================================= */
+
+.google-button {
+    width: 100%;
+
+    padding: 13px 16px;
+
+    border:
+        1px solid #dbe3ef;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    box-shadow:
+        0 2px 5px
+        rgba(15, 23, 42, 0.03);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.google-button:hover {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    box-shadow:
+        0 6px 16px
+        rgba(15, 23, 42, 0.07);
+
+    transform: translateY(-1px);
+}
+
+.google-button:active {
+    transform: translateY(0);
+}
+
+.google-button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.google-icon {
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color: #4285f4;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   SWITCH LOGIN / SIGNUP
+   ========================================================= */
+
+.switch-mode {
+    text-align: center;
+
+    margin-top: 24px;
+
+    font-size: 13px;
+
+    color: var(--muted);
+}
+
+.switch-mode button {
+    border: none;
+
+    background: transparent;
+
+    color: var(--blue);
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    margin-left: 3px;
+
+    padding: 3px 4px;
+
+    border-radius: 5px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.switch-mode button:hover {
+    color: #1d4ed8;
+
+    background: #eff6ff;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    letter-spacing: 0.2px;
+
+    animation:
+        fadeUp 0.75s ease both;
+}
+
+
+/* =========================================================
+   HIDDEN
+   ========================================================= */
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 20px 14px;
+    }
+
+    .auth-container {
+        padding: 0;
+    }
+
+    .brand {
+        margin-bottom: 21px;
+    }
+
+    .brand h1 {
+        font-size: 36px;
+    }
+
+    .brand p {
+        font-size: 13px;
+    }
+
+    .auth-card {
+        padding: 29px 22px;
+
+        border-radius: 18px;
+    }
+
+    .auth-card h2 {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+}
+
+@media (max-height: 700px) {
+
+    body {
+        align-items: flex-start;
+
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+}
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <h1>RevGuard</h1>
+
+        <p>
+            AI Revenue Recovery Command Center
+        </p>
+
+    </div>
+
+
+    <!-- AUTH CARD -->
+
+    <div class="auth-card">
+
+
+        <h2 id="authTitle">
+            Welcome Back
+        </h2>
+
+
+        <p class="subtitle" id="authSubtitle">
+            Sign in to access your RevGuard dashboard.
+        </p>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    id="showPassword"
+                >
+                    Show
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            id="authButton"
+            class="primary-button"
+        >
+            Sign In
+        </button>
+
+
+        <!-- DIVIDER -->
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <!-- GOOGLE -->
+
+        <button
+            id="googleButton"
+            class="google-button"
+        >
+
+            <span class="google-icon">
+                G
+            </span>
+
+            Continue with Google
+
+        </button>
+
+
+        <!-- SWITCH LOGIN / SIGNUP -->
+
+        <div class="switch-mode">
+
+            <span id="switchText">
+                Don't have an account?
+            </span>
+
+            <button
+                id="switchButton"
+            >
+                Create one
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer">
+
+        Protected by Firebase Authentication
+
+    </div>
+
+
+</div>
+
+
+<!-- ==================================================
+     FIREBASE AUTHENTICATION
+================================================== -->
+
+<script type="module">
+
+    import {
+        auth
+    } from "./firebase-config.js";
+
+
+    import {
+
+        createUserWithEmailAndPassword,
+
+        signInWithEmailAndPassword,
+
+        GoogleAuthProvider,
+
+        signInWithPopup
+
+    } from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const emailInput =
+        document.getElementById("email");
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const authButton =
+        document.getElementById("authButton");
+
+    const googleButton =
+        document.getElementById("googleButton");
+
+    const switchButton =
+        document.getElementById("switchButton");
+
+    const switchText =
+        document.getElementById("switchText");
+
+    const authTitle =
+        document.getElementById("authTitle");
+
+    const authSubtitle =
+        document.getElementById("authSubtitle");
+
+    const message =
+        document.getElementById("message");
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+
+    // ==========================================
+    // MODE
+    // ==========================================
+
+    let isLoginMode = true;
+
+
+    // ==========================================
+    // MESSAGE
+    // ==========================================
+
+    function showMessage(
+        text,
+        type = "error"
+    ) {
+
+        message.textContent = text;
+
+        message.className =
+            `message ${type}`;
+    }
+
+
+    function clearMessage() {
+
+        message.textContent = "";
+
+        message.className =
+            "message";
+    }
+
+
+    // ==========================================
+    // SWITCH LOGIN / SIGNUP
+    // ==========================================
+
+    switchButton.addEventListener(
+        "click",
+        () => {
+
+            isLoginMode =
+                !isLoginMode;
+
+            clearMessage();
+
+
+            if (isLoginMode) {
+
+                authTitle.textContent =
+                    "Welcome Back";
+
+                authSubtitle.textContent =
+                    "Sign in to access your RevGuard dashboard.";
+
+                authButton.textContent =
+                    "Sign In";
+
+                switchText.textContent =
+                    "Don't have an account?";
+
+                switchButton.textContent =
+                    "Create one";
+
+                passwordInput.autocomplete =
+                    "current-password";
+
+            }
+
+            else {
+
+                authTitle.textContent =
+                    "Create Account";
+
+                authSubtitle.textContent =
+                    "Create your RevGuard account to continue.";
+
+                authButton.textContent =
+                    "Create Account";
+
+                switchText.textContent =
+                    "Already have an account?";
+
+                switchButton.textContent =
+                    "Sign in";
+
+                passwordInput.autocomplete =
+                    "new-password";
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // SHOW / HIDE PASSWORD
+    // ==========================================
+
+    showPassword.addEventListener(
+        "click",
+        () => {
+
+            if (
+                passwordInput.type ===
+                "password"
+            ) {
+
+                passwordInput.type =
+                    "text";
+
+                showPassword.textContent =
+                    "Hide";
+
+            }
+
+            else {
+
+                passwordInput.type =
+                    "password";
+
+                showPassword.textContent =
+                    "Show";
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // EMAIL AUTHENTICATION
+    // ==========================================
+
+    authButton.addEventListener(
+        "click",
+        async () => {
+
+            clearMessage();
+
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+
+            // ------------------------------
+            // VALIDATION
+            // ------------------------------
+
+            if (!email) {
+
+                showMessage(
+                    "Please enter your email."
+                );
+
+                return;
+            }
+
+
+            if (!password) {
+
+                showMessage(
+                    "Please enter your password."
+                );
+
+                return;
+            }
+
+
+            if (password.length < 6) {
+
+                showMessage(
+                    "Password must be at least 6 characters."
+                );
+
+                return;
+            }
+
+
+            authButton.disabled = true;
+
+
+            try {
+
+                // ==========================
+                // CREATE ACCOUNT
+                // ==========================
+
+                if (!isLoginMode) {
+
+                    await createUserWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+                    showMessage(
+                        "Account created successfully! Redirecting...",
+                        "success"
+                    );
+
+                }
+
+
+                // ==========================
+                // LOGIN
+                // ==========================
+
+                else {
+
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+                    showMessage(
+                        "Login successful! Redirecting...",
+                        "success"
+                    );
+                }
+
+
+                // ==========================
+                // GO TO DASHBOARD
+                // ==========================
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    700
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Firebase Auth Error:",
+                    error
+                );
+
+
+                let errorMessage =
+                    "Authentication failed. Please try again.";
+
+
+                switch (error.code) {
+
+                    case "auth/email-already-in-use":
+
+                        errorMessage =
+                            "This email is already registered. Please sign in.";
+
+                        break;
+
+
+                    case "auth/invalid-email":
+
+                        errorMessage =
+                            "Please enter a valid email address.";
+
+                        break;
+
+
+                    case "auth/weak-password":
+
+                        errorMessage =
+                            "Password is too weak. Use at least 6 characters.";
+
+                        break;
+
+
+                    case "auth/invalid-credential":
+
+                    case "auth/wrong-password":
+
+                    case "auth/user-not-found":
+
+                        errorMessage =
+                            "Incorrect email or password.";
+
+                        break;
+
+
+                    case "auth/too-many-requests":
+
+                        errorMessage =
+                            "Too many attempts. Please try again later.";
+
+                        break;
+                }
+
+
+                showMessage(
+                    errorMessage
+                );
+
+            }
+
+
+            finally {
+
+                authButton.disabled =
+                    false;
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // GOOGLE LOGIN
+    // ==========================================
+
+    googleButton.addEventListener(
+        "click",
+        async () => {
+
+            clearMessage();
+
+            googleButton.disabled =
+                true;
+
+
+            try {
+
+                const provider =
+                    new GoogleAuthProvider();
+
+
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+
+                showMessage(
+                    "Google login successful! Redirecting...",
+                    "success"
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    700
+                );
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Google Login Error:",
+                    error
+                );
+
+
+                let errorMessage =
+                    "Google sign-in failed. Please try again.";
+
+
+                if (
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                ) {
+
+                    errorMessage =
+                        "Google sign-in was cancelled.";
+
+                }
+
+
+                showMessage(
+                    errorMessage
+                );
+
+            }
+
+
+            finally {
+
+                googleButton.disabled =
+                    false;
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
