@@ -15,8 +15,9 @@ import {
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyAoG7aSA1c_p9cY4GWpbBvG9Uz5KBt4f5U",
-
+    apiKey: "AIzaSyBQOrLs0k7GpATM6l1Y3F5WS3S64KkHIg4",
+             
+    
     authDomain:
         "revguard-ai-d7aaf.firebaseapp.com",
 
