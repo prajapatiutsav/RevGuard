@@ -1,601 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>RevGuard AI</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RevGuard AI — Revenue Recovery Intelligence</title>
+<style>
+:root{--bg:#05070d;--panel:rgba(14,19,33,.78);--text:#f5f7ff;--muted:#98a4bb;--line:rgba(255,255,255,.1);--a:#7c5cff;--b:#22d3ee;--g:#35e0a1}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;line-height:1.6}a{color:inherit;text-decoration:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-4}.aurora{position:fixed;inset:-20%;z-index:-3;pointer-events:none;filter:blur(65px);opacity:.3}.aurora:before,.aurora:after{content:"";position:absolute;border-radius:50%;animation:drift 15s ease-in-out infinite alternate}.aurora:before{width:42vw;height:42vw;left:8%;top:8%;background:#573bff}.aurora:after{width:34vw;height:34vw;right:10%;top:25%;background:#00c7d9;animation-delay:-6s}@keyframes drift{to{transform:translate(8vw,5vh) scale(1.12)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:rgba(5,7,13,.6);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.logo{font-size:21px;font-weight:850;display:flex;align-items:center;gap:10px}.mark{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 30px #7c5cff66}.mark:after{content:"";width:11px;height:11px;border:2px solid white;border-radius:4px;transform:rotate(45deg)}.links{display:flex;gap:28px;color:#b9c2d5;font-size:14px}.links a:hover{color:#fff}.navbtn{padding:10px 17px;border:1px solid var(--line);border-radius:12px;background:#ffffff09}
+section{position:relative;padding:110px 6vw;max-width:1400px;margin:auto}.hero{min-height:100vh;display:flex;align-items:center;padding-top:125px}.heroGrid{display:grid;grid-template-columns:1.02fr .98fr;gap:6vw;align-items:center;width:100%}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #7c5cff55;border-radius:999px;background:#7c5cff17;color:#d2caff;font-size:12px;font-weight:750;animation:up .8s both}.dot{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 15px var(--g);animation:pulse 1.7s infinite}@keyframes pulse{50%{opacity:.3;transform:scale(.7)}}h1{font-size:clamp(54px,7.3vw,108px);line-height:.92;letter-spacing:-6px;margin:25px 0;font-weight:900}.grad{background:linear-gradient(100deg,#fff,#b7a9ff,#58e9ef);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:650px;color:#aab4c8;font-size:19px}.actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.btn{padding:14px 20px;border-radius:13px;font-weight:750;font-size:14px;display:inline-flex;gap:9px;transition:.25s}.primary{background:linear-gradient(135deg,var(--a),#5f8dff);box-shadow:0 15px 40px #5c4bff4d}.primary:hover,.ghost:hover{transform:translateY(-3px)}.ghost{border:1px solid var(--line);background:#ffffff0b}.scroll{margin-top:50px;color:#69758b;font-size:11px;letter-spacing:2px;text-transform:uppercase}.scroll span{display:inline-block;width:28px;height:1px;background:#536079;margin-right:10px}
+.visual{position:relative;height:570px;display:grid;place-items:center}.ring{position:absolute;border:1px solid #7c5cff33;border-radius:50%;animation:spin 22s linear infinite}.r1{width:450px;height:450px}.r2{width:330px;height:330px;border-color:#22d3ee38;animation-direction:reverse;animation-duration:16s}@keyframes spin{to{transform:rotate(360deg)}}.orb{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--b);box-shadow:0 0 25px var(--b);transform:translate(225px,-40px)}.card{width:min(510px,90%);border:1px solid #ffffff22;border-radius:22px;background:linear-gradient(145deg,#161d30ee,#080c16e8);box-shadow:0 30px 90px #00000061,0 0 80px #5b48ff22;padding:22px;z-index:2;animation:float 5s ease-in-out infinite}@keyframes float{50%{transform:translateY(-13px) rotateY(-3deg)}}.top{display:flex;justify-content:space-between;color:#9da9bd;font-size:11px;margin-bottom:18px}.live{color:var(--g)}.big{font-size:37px;font-weight:850}.small{font-size:11px;color:#77839a}.bars{margin-top:23px;display:grid;gap:13px}.bar{display:grid;grid-template-columns:82px 1fr 48px;gap:10px;align-items:center;font-size:11px;color:#9aa6bc}.track{height:8px;background:#20283a;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--a),var(--b));animation:grow 1.8s ease}@keyframes grow{from{width:0!important}}.bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.kpi{padding:13px;border-radius:13px;background:#ffffff08;border:1px solid var(--line)}.kpi b{display:block;font-size:20px}.kpi span{font-size:10px;color:#758198}
+.stats{padding-top:25px}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#ffffff06}.stat{padding:30px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat strong{font-size:32px;letter-spacing:-1px}.stat span{display:block;color:#7f8ba1;font-size:12px}
+.label{color:#927fff;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;margin-bottom:14px}h2{font-size:clamp(36px,5vw,65px);line-height:1;letter-spacing:-3px;margin-bottom:20px}.lead{color:#8f9bb0;max-width:690px;font-size:17px}.problem{display:grid;grid-template-columns:.8fr 1.2fr;gap:8vw;align-items:center}.pcards{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pcard,.strategy{padding:25px;border:1px solid var(--line);border-radius:18px;background:var(--panel);transition:.3s}.pcard:hover,.strategy:hover{transform:translateY(-7px);border-color:#7c5cff66}.pcard h3,.strategy h3{font-size:16px}.pcard p,.strategy p{font-size:12px;color:#7f8ca1;margin-top:7px}.icon{font-size:24px;margin-bottom:14px}
+.pipeline{margin-top:55px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.step{min-height:155px;padding:20px 16px;border:1px solid var(--line);border-radius:17px;background:#0d1321cc}.num{font-size:10px;color:#69758a}.step h3{font-size:14px;margin:20px 0 6px}.step p{font-size:11px;color:#78859b}
+.strategygrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}.sicon{font-size:25px}.strategy h3{margin-top:16px;font-size:15px}
+.impact{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.impactPanel{padding:30px;border-radius:24px;border:1px solid var(--line);background:var(--panel)}.impactrow{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);font-size:13px}.impactrow:last-child{border:0}.impactrow b{font-size:18px}.green{color:var(--g)}
+.arch{margin-top:50px;padding:40px;border:1px solid var(--line);border-radius:25px;background:#0a0e18b8}.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.node{padding:18px 20px;border:1px solid #7c5cff40;background:#7c5cff12;border-radius:15px;text-align:center;min-width:125px}.node small{display:block;color:#6f7b91;font-size:9px;margin-top:5px}.arrow{color:#69768d;font-size:20px;animation:ap 1.4s infinite}@keyframes ap{50%{opacity:.25;transform:translateX(4px)}}.note{text-align:center;color:#66738a;font-size:11px;margin-top:25px}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:8vw;align-items:center}.profile{width:220px;height:220px;border-radius:50%;margin:auto;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#b4a8ff,transparent 20%),linear-gradient(135deg,#1b1734,#081c24);border:1px solid #ffffff22;box-shadow:0 0 80px #7c5cff30;position:relative}.profile:before{content:"U";font-size:90px;font-weight:900}.profile:after{content:"";position:absolute;inset:-15px;border:1px solid #22d3ee33;border-radius:50%;animation:spin 9s linear infinite}.builds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:25px}.build{padding:13px 15px;border-radius:12px;border:1px solid var(--line);background:#ffffff06;font-size:12px;color:#aeb8ca}.tech{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.tech span{padding:9px 13px;border-radius:999px;background:#ffffff0b;border:1px solid var(--line);font-size:12px;color:#a8b2c5}
+.final{text-align:center;min-height:65vh;display:grid;place-items:center}.final p{color:#8995aa;font-size:17px;max-width:600px;margin:0 auto 30px}.footer{border-top:1px solid var(--line);padding:25px 6vw;color:#657188;font-size:11px;display:flex;justify-content:space-between}.reveal{opacity:0;transform:translateY(35px);transition:.8s}.reveal.visible{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.links{display:none}.heroGrid,.problem,.impact,.about{grid-template-columns:1fr}.visual{height:450px}.r1{width:340px;height:340px}.r2{width:250px;height:250px}.statgrid{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.pipeline{grid-template-columns:1fr 1fr}.strategygrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){section{padding:80px 5vw}.hero{padding-top:115px}.hero p{font-size:16px}h1{letter-spacing:-3px}.visual{height:390px}.card{padding:17px}.statgrid,.pcards,.builds,.strategygrid{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}.arch{padding:22px}.flow{display:grid}.arrow{transform:rotate(90deg)}.footer{flex-direction:column;gap:8px}}
+</style>
 </head>
-
-
 <body>
+<canvas id="stars"></canvas><div class="aurora"></div>
+<nav><a class="logo" href="#top"><span class="mark"></span>RevGuard<span style="color:#7c5cff">AI</span></a><div class="links"><a href="#problem">Problem</a><a href="#how">How it works</a><a href="#impact">Impact</a><a href="#about">Creator</a></div><a class="navbtn" href="login.html">Enter Dashboard →</a></nav>
 
+<main id="top">
+<section class="hero"><div class="heroGrid"><div><div class="eyebrow"><span class="dot"></span> AI-POWERED REVENUE RECOVERY</div><h1>Turn failed payments into <span class="grad">recovered revenue.</span></h1><p>RevGuard is an intelligent revenue-recovery command center that predicts recovery opportunities, chooses economically effective actions, and gives teams a clear view of what can be recovered.</p><div class="actions"><a class="btn primary" href="login.html">Explore RevGuard ↗</a><a class="btn ghost" href="#how">See how it works ↓</a></div><div class="scroll"><span></span> Scroll to explore</div></div>
+<div class="visual"><div class="ring r1"></div><div class="ring r2"></div><div class="orb"></div><div class="card"><div class="top"><span>REVGUARD COMMAND CENTER</span><span class="live">● LIVE SYSTEM</span></div><div class="small">Revenue at Risk</div><div class="big">₹16.64 Cr</div><div class="bars">
+<div class="bar"><span>Payment Link</span><div class="track"><div class="fill" style="width:89%"></div></div><b>4,074</b></div>
+<div class="bar"><span>Escalation</span><div class="track"><div class="fill" style="width:58%"></div></div><b>613</b></div>
+<div class="bar"><span>WhatsApp</span><div class="track"><div class="fill" style="width:42%"></div></div><b>261</b></div>
+<div class="bar"><span>Email</span><div class="track"><div class="fill" style="width:24%"></div></div><b>39</b></div>
+<div class="bar"><span>Retry</span><div class="track"><div class="fill" style="width:15%"></div></div><b>13</b></div></div>
+<div class="bottom"><div class="kpi"><b>68.48%</b><span>RECOVERY RATE</span></div><div class="kpi"><b>₹11.38 Cr</b><span>RECOVERED REVENUE</span></div></div></div></div></div></section>
 
-    <!-- ==================================================
-         HEADER
-    ================================================== -->
+<section class="stats reveal"><div class="statgrid"><div class="stat"><strong data-n="16.64">₹0</strong><span>REVENUE AT RISK · CRORE</span></div><div class="stat"><strong data-n="11.38">₹0</strong><span>RECOVERED REVENUE · CRORE</span></div><div class="stat"><strong data-n="68.48">0%</strong><span>RECOVERY RATE</span></div><div class="stat"><strong data-n="72195">0</strong><span>RECOVERY CASES</span></div></div></section>
 
-   <header>
+<section id="problem" class="problem reveal"><div><div class="label">01 · The problem</div><h2>Every failed payment is a decision.</h2><p class="lead">A failed transaction doesn't always mean lost revenue. The challenge is knowing which opportunity is worth pursuing, which action to use, and when to escalate.</p></div><div class="pcards"><div class="pcard"><div class="icon">⚠️</div><h3>Revenue leakage</h3><p>Failed payments can silently turn into permanent revenue loss.</p></div><div class="pcard"><div class="icon">🎯</div><h3>One-size-fits-all recovery</h3><p>Different customers and failures need different recovery strategies.</p></div><div class="pcard"><div class="icon">💸</div><h3>Action cost matters</h3><p>A higher predicted probability isn't automatically the most valuable action.</p></div><div class="pcard"><div class="icon">⏱️</div><h3>Timing matters</h3><p>Recovery teams need prioritization instead of an endless list of failed payments.</p></div></div></section>
 
-   <header>
+<section id="how" class="reveal"><div class="label">02 · Intelligence pipeline</div><h2>From payment failure<br>to recovery action.</h2><p class="lead">RevGuard combines data processing, machine learning, economic decision-making and outcome feedback into one recovery workflow.</p><div class="pipeline">
+<div class="step"><span class="num">01</span><h3>Transaction Data</h3><p>Payment, customer and recovery information enters the pipeline.</p></div><div class="step"><span class="num">02</span><h3>Data Processing</h3><p>Clean, transform and prepare features for analysis.</p></div><div class="step"><span class="num">03</span><h3>ML Prediction</h3><p>Estimate recovery outcomes from available signals.</p></div><div class="step"><span class="num">04</span><h3>Decision Engine</h3><p>Evaluate expected recovery value and action economics.</p></div><div class="step"><span class="num">05</span><h3>Recovery Action</h3><p>Prioritize retry, payment link, WhatsApp, email or escalation.</p></div><div class="step"><span class="num">06</span><h3>Feedback Loop</h3><p>Observed outcomes can improve future decisions.</p></div></div></section>
 
-    <div class="brand-area">
+<section class="reveal"><div class="label">03 · Recovery strategies</div><h2>One engine.<br>Multiple ways to recover.</h2><p class="lead">RevGuard organizes recovery opportunities around actions appropriate for the case and the economics of recovery.</p><div class="strategygrid"><div class="strategy"><div class="sicon">↻</div><h3>Retry</h3><p>Attempt recovery when another payment attempt is appropriate.</p></div><div class="strategy"><div class="sicon">🔗</div><h3>Payment Link</h3><p>Give the customer a direct path to complete payment.</p></div><div class="strategy"><div class="sicon">◉</div><h3>WhatsApp</h3><p>Reach customers through a direct conversational channel.</p></div><div class="strategy"><div class="sicon">✉</div><h3>Email</h3><p>Send a structured recovery message and payment route.</p></div><div class="strategy"><div class="sicon">♙</div><h3>Human Escalation</h3><p>Bring higher-value or complex cases to a recovery team.</p></div></div></section>
 
-        <div class="brand-mark">
-            RG
-        </div>
+<section id="impact" class="impact reveal"><div><div class="label">04 · Business impact</div><h2>See where recovery is still possible.</h2><p class="lead">The dashboard turns raw recovery activity into metrics a business team can act on — including revenue at risk, recovered revenue, recovery rate and incremental opportunity.</p></div><div class="impactPanel"><div class="impactrow"><span>Revenue at Risk</span><b>₹16,64,18,955</b></div><div class="impactrow"><span>Recovered Revenue</span><b class="green">₹11,38,37,209</b></div><div class="impactrow"><span>Recovery Rate</span><b class="green">68.48%</b></div><div class="impactrow"><span>Unrecovered Revenue</span><b>₹5,25,81,746</b></div><div class="impactrow"><span>Incremental Opportunity</span><b class="green">₹7,45,636</b></div></div></section>
 
-        <div class="brand-text">
+<section class="reveal"><div class="label">05 · System architecture</div><h2>Built as a real<br>decision system.</h2><p class="lead">The prototype demonstrates the core intelligence layer. In production, transaction events could arrive through APIs or payment webhooks and feed the same processing and decision pipeline.</p><div class="arch"><div class="flow"><div class="node">Payment / Data<small>Transactions & events</small></div><div class="arrow">→</div><div class="node">Processing<small>Clean + features</small></div><div class="arrow">→</div><div class="node">ML Models<small>Recovery prediction</small></div><div class="arrow">→</div><div class="node">Decision Engine<small>Economic policy</small></div><div class="arrow">→</div><div class="node">Recovery Action<small>Execute + track</small></div></div><div class="note">Prototype data layer: representative transaction and recovery datasets · Production path: API / webhook ingestion</div></div></section>
 
-            <div class="brand-name">
-                RevGuard
-            </div>
+<section id="about" class="about reveal"><div><div class="profile"></div></div><div><div class="label">06 · The creator</div><h2>Built by Utsav Prajapati.</h2><p class="lead">RevGuard was built as a practical AI/ML product concept — connecting data, prediction, economic decision-making, backend services and a production-style dashboard into one system.</p><div class="builds"><div class="build">🤖 <b>ML Pipeline</b><br>Recovery prediction & action intelligence</div><div class="build">⚙️ <b>Decision Engine</b><br>Recovery value and policy logic</div><div class="build">📊 <b>Analytics</b><br>Business metrics and opportunities</div><div class="build">🚀 <b>Deployment</b><br>Live frontend + backend architecture</div></div><div class="tech"><span>Python</span><span>FastAPI</span><span>Pandas</span><span>Scikit-learn</span><span>JavaScript</span><span>Firebase</span><span>Render</span><span>GitHub</span></div></div></section>
 
-            <div class="brand-subtitle">
-                AI Revenue Intelligence Platform
-            </div>
+<section class="final reveal"><div><div class="label">07 · Explore the product</div><h2>Ready to see <span class="grad">RevGuard</span> in action?</h2><p>Step inside the recovery command center and explore the analytics, recovery strategies and AI-driven opportunity view.</p><a class="btn primary" href="login.html">Enter RevGuard Dashboard ↗</a></div></section>
+</main>
+<footer class="footer"><span>© 2026 RevGuard AI · Built by Utsav Prajapati</span><span>AI-powered revenue recovery</span></footer>
 
-        </div>
-
-    </div>
-
-
-    <div class="header-right">
-
-        <div class="header-meta">
-
-            <div class="status">
-
-                <span class="status-dot"></span>
-
-                <span>
-                    AI Engine Online
-                </span>
-
-            </div>
-
-            <div class="sync-status">
-                ● Live
-            </div>
-
-        </div>
-
-
-        <div class="user-profile">
-
-            <div class="user-avatar" id="userAvatar">
-                U
-            </div>
-
-            <div class="user-info">
-
-                <span class="user-label">
-                    Signed in as
-                </span>
-
-                <strong id="userEmail">
-                    Loading...
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="logout-button"
-            id="logoutButton"
-        >
-            Logout
-        </button>
-
-    </div>
-
-</header>
-
-</header>
-
-
-    <!-- ==================================================
-         DASHBOARD METRICS
-    ================================================== -->
-
-    <section class="metrics">
-
-
-        <!-- REVENUE AT RISK -->
-
-        <div class="metric-card">
-
-            <span>
-                Revenue At Risk
-            </span>
-
-            <strong id="revenueAtRisk">
-                Loading...
-            </strong>
-
-        </div>
-
-
-        <!-- RECOVERED REVENUE -->
-
-        <div class="metric-card">
-
-            <span>
-                Revenue Recovered
-            </span>
-
-            <strong id="recoveredRevenue">
-                Loading...
-            </strong>
-
-        </div>
-
-
-        <!-- RECOVERY RATE -->
-
-        <div class="metric-card">
-
-            <span>
-                Recovery Rate
-            </span>
-
-            <strong id="recoveryRate">
-                Loading...
-            </strong>
-
-        </div>
-
-
-        <!-- INCREMENTAL OPPORTUNITY -->
-
-        <div class="metric-card">
-
-            <span>
-                Incremental Opportunity
-            </span>
-
-            <strong id="incrementalOpportunity">
-                Loading...
-            </strong>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ==================================================
-         ANALYTICS SUMMARY
-    ================================================== -->
-
-    <section class="analytics-summary">
-
-
-        <div class="summary-card">
-
-            <span>
-                Recovery Cases
-            </span>
-
-            <strong id="totalCases">
-                Loading...
-            </strong>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <span>
-                Unrecovered Revenue
-            </span>
-
-            <strong id="unrecoveredRevenue">
-                Loading...
-            </strong>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <span>
-                AI Strategy Status
-            </span>
-
-            <strong>
-                Active
-            </strong>
-
-        </div>
-
-
-    </section>
-
-<!-- ==================================================
-     ACTION ANALYTICS
-================================================== -->
-
-<section class="charts-section">
-
-    <!-- RECOVERY RATE -->
-
-    <div class="chart-card">
-
-        <h2>
-            Recovery Rate by Action
-        </h2>
-
-        <p>
-            Historical recovery performance across
-            recovery strategies.
-        </p>
-
-        <div id="recoveryRateChart"
-             class="bar-chart">
-
-            <div class="chart-loading">
-                Loading chart...
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STRATEGY DISTRIBUTION -->
-
-    <div class="chart-card">
-
-        <h2>
-            RevGuard Strategy Distribution
-        </h2>
-
-        <p>
-            Actions selected by the AI strategy simulation.
-        </p>
-
-        <div id="strategyChart"
-             class="strategy-chart">
-
-            <div class="chart-loading">
-                Loading chart...
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-    <!-- ==================================================
-         ANALYZE PAYMENT
-    ================================================== -->
-
-    <section class="search-section">
-
-        <h2>
-            Analyze Failed Payment
-        </h2>
-
-
-        <p>
-            Enter a transaction ID and let RevGuard
-            determine the economically optimal recovery
-            strategy.
-        </p>
-
-
-        <div class="search-box">
-
-            <input
-                id="transactionId"
-                type="number"
-                placeholder="Enter transaction ID"
-                value="29154"
-            >
-
-
-            <button
-                onclick="analyzePayment()"
-            >
-
-                Analyze Payment
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         LOADING
-    ================================================== -->
-
-    <div
-        id="loading"
-        class="loading hidden"
-    >
-
-        <div class="loader"></div>
-
-        <span>
-            RevGuard AI is analyzing the payment...
-        </span>
-
-    </div>
-
-
-
-    <!-- ==================================================
-         ERROR
-    ================================================== -->
-
-    <div
-        id="error"
-        class="error hidden"
-    ></div>
-
-
-
-    <!-- ==================================================
-         TRANSACTION RESULT
-    ================================================== -->
-
-    <section
-        id="result"
-        class="result hidden"
-    >
-
-
-        <!-- ==================================================
-             TRANSACTION DETAILS
-        ================================================== -->
-
-        <div class="customer-card">
-
-            <h2>
-                Transaction Details
-            </h2>
-
-
-            <div class="details">
-
-
-                <div>
-
-                    <span>
-                        Transaction
-                    </span>
-
-                    <strong id="transaction">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Customer
-                    </span>
-
-                    <strong id="customer">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Amount
-                    </span>
-
-                    <strong id="amount">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Failure Reason
-                    </span>
-
-                    <strong id="failure">
-                        -
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ==================================================
-             AI DECISION
-        ================================================== -->
-
-        <div class="decision-card">
-
-
-            <div class="decision-header">
-
-
-                <div>
-
-                    <span class="label">
-                        AI RECOMMENDATION
-                    </span>
-
-
-                    <h2 id="recommendedAction">
-                        -
-                    </h2>
-
-                </div>
-
-
-                <div
-                    id="interventionBadge"
-                    class="badge"
-                >
-
-                    -
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- DECISION METRICS -->
-
-            <div class="decision-metrics">
-
-
-                <div>
-
-                    <span>
-                        Recovery Probability
-                    </span>
-
-                    <strong id="probability">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Incremental Value
-                    </span>
-
-                    <strong id="incrementalValue">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Baseline Action
-                    </span>
-
-                    <strong id="baseline">
-                        -
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Policy
-                    </span>
-
-                    <strong id="policy">
-                        -
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ==================================================
-             EXPLAINABILITY
-        ================================================== -->
-
-        <div class="explanation-card">
-
-
-            <h2>
-                🧠 Why RevGuard Chose This
-            </h2>
-
-
-            <ul id="reasons"></ul>
-
-
-
-            <!-- WARNINGS -->
-
-            <div
-                id="warningsContainer"
-                class="warnings hidden"
-            >
-
-                <h3>
-                    ⚠️ Warnings
-                </h3>
-
-
-                <ul id="warnings"></ul>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ==================================================
-         FOOTER
-    ================================================== -->
-
-
-
-    <!-- ==================================================
-         JAVASCRIPT
-    ================================================== -->
-
-    <script src="app.js"></script>
-
-<script
-    type="module"
-    src="auth-guard.js"
-></script>
-
-
+<script>
+const c=document.getElementById("stars"),x=c.getContext("2d");let W,H,s=[];
+function resize(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;s=Array.from({length:Math.min(170,Math.floor(innerWidth/7))},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.3+.25)*devicePixelRatio,v:(Math.random()*.16+.04)*devicePixelRatio}))}
+function draw(){x.clearRect(0,0,W,H);x.fillStyle="#fff";s.forEach(a=>{a.y+=a.v;if(a.y>H)a.y=0;x.globalAlpha=.2+Math.sin((a.x+a.y)*.002)*.18;x.beginPath();x.arc(a.x,a.y,a.r,0,7);x.fill()});requestAnimationFrame(draw)}addEventListener("resize",resize);resize();draw();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.13});document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
+const co=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;document.querySelectorAll("[data-n]").forEach(el=>{let t=+el.dataset.n,start=performance.now();function q(now){let p=Math.min((now-start)/1500,1),v=t*(1-Math.pow(1-p,3));el.textContent=t<20?"₹"+v.toFixed(2)+" Cr":t<100?" "+v.toFixed(2)+"%":Math.round(v).toLocaleString("en-IN");if(p<1)requestAnimationFrame(q)}requestAnimationFrame(q)});co.disconnect()},{threshold:.5});co.observe(document.querySelector(".stats"));
+</script>
 </body>
-
 </html>
